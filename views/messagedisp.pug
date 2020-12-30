@@ -1,0 +1,67 @@
+extends layout
+
+block header
+  div(class='jumbotron text-center')
+    h1= title
+
+block content
+  div(class='container')
+    div(class='row')
+      div(class='col-sm-2')
+        a(href='/messages') Messages
+        br
+        a(href='/users/logout') Logout
+      //-div(class='col-sm-4')
+        p Welcome to #{title}!
+        br
+        p= message
+      div(class='col-sm-10')
+        table
+          tr
+            th Title
+            th Author
+            th Date
+            //- print out title, author, date, contents of the message???
+            tr
+              td= message.title  
+              td= message.author
+              td= message.createdAt
+        h4 Contents
+        
+        if(message.imageURL != "")
+        img(src=message.imageURL) 
+
+        p= message.content
+
+        h4 Comments
+        each comment in message.comments
+          if(comment.createdAt != null)
+            p On #{comment.createdAt} #{comment.author} commented:
+            if(comment.imageURL != "")
+              img(src=comment.imageURL)
+            p= comment.content
+          else
+            p Just now #{comment.author} commented:
+            if(comment.imageURL != "")
+              img(src=comment.imageURL)
+            p= comment.content
+          a(href=message._id+'/'+comment._id) View Comment
+        else
+            p There are no comments yet!
+        form(action="/comments", method='post')
+            p Comment
+            input(type='text', name="comment", size='60', maxlength='1000')
+            p Image URL(Optional)
+            input(type='text', name="imageURL", size='60', maxlength='1000')
+            input(type='hidden', name='messageid', value=message._id)
+            input(type="submit", value="Add comment")
+        
+//- THIS is a comment
+//- Nested tags should be indented
+
+block footer 
+
+  p This project was created by #{author} 
+    //- The link below goes inside the above paragraph
+    a(href='mailto:'+author_email) #{author_email}
+

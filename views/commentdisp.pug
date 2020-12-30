@@ -1,0 +1,46 @@
+extends layout
+
+block header
+  div(class='jumbotron text-center')
+    h1= title
+
+block content
+  div(class='container')
+    div(class='row')
+      div(class='col-sm-2')
+        a(href='/messages') Messages
+        br
+        a(href='/users/logout') Logout
+      //-div(class='col-sm-4')
+        p Welcome to #{title}!
+        br
+        p= message
+      div(class='col-sm-10')
+        table
+          tr
+            th Author
+            th Date
+            //- print out the author and date of the comment
+            tr 
+              td= comment.author
+              td= comment.createdAt
+        h4 Contents
+        
+        if(comment.imageURL != "")
+        img(src=comment.imageURL) 
+
+        p= comment.content
+        a(href='/messages/'+message._id) Back to the message
+
+
+        
+        
+//- THIS is a comment
+//- Nested tags should be indented
+
+block footer 
+
+  p This project was created by #{author} 
+    //- The link below goes inside the above paragraph
+    a(href='mailto:'+author_email) #{author_email}
+

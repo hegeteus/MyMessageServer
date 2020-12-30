@@ -1,0 +1,48 @@
+extends layout
+
+block header
+  div(class='jumbotron text-center')
+    h1= title
+
+block content
+  div(class='container')
+    div(class='row')
+      div(class='col-sm-2')
+        a(href='/messages') Messages
+        br
+        a(href='/users/logout') Logout
+      div(class='col-sm-4')
+        p Welcome to #{title}!
+        br
+        p= message
+      div(class='col-sm-4')
+        form(name='login', method='post', action='users/login')
+          label Username:
+          input(
+          type='text'
+          name='username'
+          )
+          br
+          label Password:
+          input(
+            type='password'
+            name='password'
+          )
+          br
+          input(
+            type='submit',
+            formmethod='post',
+            value='Login!'
+          )
+        a(href='/signup') Signup as a new user here!
+
+
+//- THIS is a comment
+//- Nested tags should be indented
+
+block footer 
+
+  p This project was created by #{author} 
+    //- The link below goes inside the above paragraph
+    a(href='mailto:'+author_email) #{author_email}
+

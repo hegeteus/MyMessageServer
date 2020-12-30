@@ -1,0 +1,5 @@
+extends commentdisp
+
+block append content
+    form(action=`/messages/${message._id}/${comment._id}_delete`, method = 'post')
+        input(type="submit", value="Delete message")

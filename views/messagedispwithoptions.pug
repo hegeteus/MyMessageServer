@@ -1,0 +1,5 @@
+extends messagedisp
+
+block append content
+    form(action=`/messages/${message._id}_delete`, method = 'post')
+        input(type="submit", value="Delete message")
